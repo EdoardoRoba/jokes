@@ -18,7 +18,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/logo.png",
+      "infoPlist": {},
+      "bundleIdentifier": "com.jokes.generator",
+      "buildNumber": "1.0.1"
     },
     "android": {
       "adaptiveIcon": {
