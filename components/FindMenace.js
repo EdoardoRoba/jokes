@@ -5,6 +5,7 @@ import { StyleSheet, View, Alert, ActivityIndicator, Text, TouchableOpacity, Saf
 import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Tooltip } from 'react-native-elements';
+import { getDatabase, ref, onValue, set } from 'firebase/database';
 
 const styles = StyleSheet.create({
     container: {
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Home() {
+export default function FindMenace() {
 
     const [setup, setSetup] = React.useState("")
     const [delivery, setDelivery] = React.useState("")
@@ -42,26 +43,9 @@ export default function Home() {
     }
 
     const searchForNewJoke = () => {
-        setSetup("")
-        setDelivery("")
-        setIsLoading(true)
-        setVisible(false)
-        axios.get(url)
-            .then(response => {
-                setIsLoading(false)
-                // setDelivery(response.data)
-                setSetup(response.data.setup)
-                const timer = setTimeout(() => {
-                    setDelivery(response.data.delivery)
-                    setVisible(true)
-                }, 5000);
-                return () => clearTimeout(timer);
-            }).catch(error => {
-                setIsLoading(false)
-                setSetup("ERROR. RETRY.")
-                setVisible(true)
-                console.log(error)
-            });
+        console.log("ciao")
+
+
     }
 
     return (
@@ -71,18 +55,6 @@ export default function Home() {
                     <Icon name={"search"} size={25} style={{ marginTop: 10 }} />
                 </TouchableOpacity>
             }
-            <SafeAreaView style={styleScroll}>
-                <ScrollView showsVerticalScrollIndicator={false} persistentScrollbar={true}>
-                    <Pressable style={{ width: 300, alignItems: "center" }}>
-                        <View style={{ maxWidth: 300, marginBottom: 50 }}>
-                            <Text style={{ fontSize: 18 }}>{setup}</Text>
-                        </View>
-                        <View style={{ maxWidth: 300 }}>
-                            <Text style={{ fontSize: 18 }}>{delivery}</Text>
-                        </View>
-                    </Pressable>
-                </ScrollView>
-            </SafeAreaView>
             {
                 !isLoading ? null : <View style={styles.overlayLoadingContainer}>
                     <ActivityIndicator size="large" color="green" animating={true} />
